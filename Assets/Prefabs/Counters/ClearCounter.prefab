@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kitchenObjectSO: {fileID: 11400000, guid: f6310119a80d1411280e0da948fb950b, type: 2}
-  counterTabPoint: {fileID: 1684886080432072222}
+  counterTopPoint: {fileID: 1684886080432072222}
 --- !u!1 &8428705640658627837
 GameObject:
   m_ObjectHideFlags: 0

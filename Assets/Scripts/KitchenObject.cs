@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class KitchenObject : MonoBehaviour
@@ -7,29 +5,31 @@ public class KitchenObject : MonoBehaviour
 
     [SerializeField] KitchenObjectSO kitchenObjectSO;
 
-    private ClearCounter clearCounter;
+    private IKitchenObjectParent kitchenObjectParent;
 
     public KitchenObjectSO GetKitchenObjectSO()
     {
         return kitchenObjectSO;
     }
 
-    public void SetClearCounter(ClearCounter newClearCounter)
+    public void SetKitchenObjectParent(IKitchenObjectParent newKitchenObjectParent)
     {
-        if (clearCounter != null)
+        if (kitchenObjectParent != null)
         {
-            clearCounter.ClearKitchenObject();
+            kitchenObjectParent.ClearKitchenObject();
         }
 
-        clearCounter = newClearCounter;
-        newClearCounter.SetKitchenObject(this);
+        kitchenObjectParent = newKitchenObjectParent;
 
-        transform.parent = newClearCounter.GetKitchenObjectFollowTransform();
+        newKitchenObjectParent.SetKitchenObject(this);
+
+
+        transform.parent = newKitchenObjectParent.GetKitchenObjectFollowTransform();
         transform.localPosition = Vector3.zero;
     }
 
-    public ClearCounter GetClearCounter()
+    public IKitchenObjectParent GetKitchenObjectParent()
     {
-        return clearCounter;
+        return kitchenObjectParent;
     }
 }
