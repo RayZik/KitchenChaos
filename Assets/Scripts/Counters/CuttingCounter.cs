@@ -49,7 +49,7 @@ public class CuttingCounter : BaseCounter
             }
             else
             {
-                GetKitchenObject().SetKitchenObjectParent(player);
+                GetKitchenObject().SetKitchenObjectParent(player); 
             }
         }
 
@@ -57,26 +57,29 @@ public class CuttingCounter : BaseCounter
 
     public override void InteractAlternate(Player player)
     {
-        KitchenObjectSO currentKitchenObjectSO = GetKitchenObject().GetKitchenObjectSO();
-
-        if (HasKitchenObject() && HasRecipeWithInput(currentKitchenObjectSO))
+        if (HasKitchenObject())
         {
-            cuttingProgress++;
+            KitchenObjectSO currentKitchenObjectSO = GetKitchenObject().GetKitchenObjectSO();
 
-            CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(currentKitchenObjectSO);
-
-            OnCuttingProgressChanged?.Invoke(this, new OnCuttingProgressChangedEventArgs
+            if (HasRecipeWithInput(currentKitchenObjectSO))
             {
-                progressNormilized = (float)cuttingProgress / cuttingRecipeSO.cuttingProgressMax
-            });
+                cuttingProgress++;
+
+                CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(currentKitchenObjectSO);
+
+                OnCuttingProgressChanged?.Invoke(this, new OnCuttingProgressChangedEventArgs
+                {
+                    progressNormilized = (float)cuttingProgress / cuttingRecipeSO.cuttingProgressMax
+                });
 
 
-            if (cuttingProgress >= cuttingRecipeSO.cuttingProgressMax)
-            {
-                KitchenObjectSO kitchenObjectSO = GetOutputForInput(currentKitchenObjectSO);
-                GetKitchenObject().DestroySelf();
+                if (cuttingProgress >= cuttingRecipeSO.cuttingProgressMax)
+                {
+                    KitchenObjectSO kitchenObjectSO = GetOutputForInput(currentKitchenObjectSO);
+                    GetKitchenObject().DestroySelf();
 
-                KitchenObject.SpawnKitchenObject(kitchenObjectSO, this);
+                    KitchenObject.SpawnKitchenObject(kitchenObjectSO, this);
+                }
             }
         }
 
