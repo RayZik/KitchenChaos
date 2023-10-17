@@ -15,10 +15,10 @@ public class CutterCounterVisual : MonoBehaviour
 
     private void Start()
     {
-        cuttingCounter.OnCuttingProgressChanged += CuttingCounter_OnCuttingProgressChanged;
+        cuttingCounter.OnProgressChanged += CuttingCounter_OnProgressChanged;
     }
 
-    private void CuttingCounter_OnCuttingProgressChanged(object sender, CuttingCounter.OnCuttingProgressChangedEventArgs e)
+    private void CuttingCounter_OnProgressChanged(object sender, IHasProgress.OnProgressChangedEventArgs e)
     {
         if (e.progressNormilized != 0)
         {
