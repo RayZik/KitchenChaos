@@ -52,7 +52,6 @@ public class CuttingCounter : BaseCounter
                 GetKitchenObject().SetKitchenObjectParent(player); 
             }
         }
-
     }
 
     public override void InteractAlternate(Player player)
