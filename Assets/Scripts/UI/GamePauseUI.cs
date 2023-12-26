@@ -9,6 +9,8 @@ public class GamePauseUI : MonoBehaviour
     private Button resumeButton;
     [SerializeField]
     private Button mainMenuButton;
+    [SerializeField]
+    private Button optionsButton;
 
     private void Awake()
     {
@@ -20,6 +22,12 @@ public class GamePauseUI : MonoBehaviour
         resumeButton.onClick.AddListener(() =>
         {
             GameManager.Instance.TogglePauseGame();
+        });
+
+        optionsButton.onClick.AddListener(() =>
+        {
+            Hide();
+            OptionsUI.Instance.Show(Show);
         });
     }
 
@@ -44,6 +52,7 @@ public class GamePauseUI : MonoBehaviour
     private void Show()
     {
         gameObject.SetActive(true);
+        resumeButton.Select();
     }
 
     private void Hide()
